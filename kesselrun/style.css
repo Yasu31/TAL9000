@@ -1,0 +1,11 @@
+#main{
+    background-color: antiquewhite;
+}
+#side{
+    float:right;
+    width:auto;
+    background-color:darkturquoise;
+}
+#title{
+    color: yellow;
+}

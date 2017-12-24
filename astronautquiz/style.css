@@ -1,0 +1,47 @@
+#option1 {
+    background-color:darkviolet;
+    color:white;
+    text-align:center;
+    padding:0px;
+    border-radius: 10px;
+}
+
+#option2 {
+    background-color:darkviolet;
+    color:white;
+    text-align:center;
+    padding:0px;
+    border-radius: 10px;
+}
+
+#body{
+    background-image: url("stars.jpg");
+    color:white;
+    font-family:sans-serif;
+    //padding: 0px;
+}
+
+#options{
+    font-size: 40px
+}
+
+#astro{
+    height:200px;
+    border-radius: 20px;
+}
+
+#earth{
+    position: absolute;
+    bottom:-120px;
+    left:-50px;
+    width:120%;
+    z-index: -2;
+}
+#title{
+    background-color: darkblue;
+    border-radius: 10px;
+}
+
+#astronaut{
+    z-index: -1;
+}

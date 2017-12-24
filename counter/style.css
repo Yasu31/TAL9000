@@ -1,0 +1,28 @@
+
+#header{
+    background-color: darkslategray;
+    color:beige;
+    height:50px;
+    text-align:center;
+}
+#record{
+    background-color: beige;
+    color:black;
+    text-align: center;
+    float:right;
+    width:200px;
+    height:auto;
+    padding-bottom:30px;
+}
+#main{
+    text-align: center;
+    float: left;
+}
+#record2{
+    background-color: antiquewhite;
+    text-align: center;
+    float:right;
+    width: 200px;
+    height:auto;
+    padding-bottom:30px;
+}
