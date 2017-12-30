@@ -1,0 +1,9 @@
+#main{
+    background-color: antiquewhite;
+    width:500px;
+}
+#side{
+    float:right;
+    width:100px;
+    background-color:darkturquoise;
+}

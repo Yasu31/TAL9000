@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>時計</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>時計</h1>
+  <script>
+  var d=new Date;
+  document.write(d.getFullYear());
+  document.write("年");
+  document.write(d.getMonth());
+  document.write("月")
+  document.write(d.getDate());
+  document.write("日")
+  document.write(d.getHours());
+  document.write("時")
+  document.write(d.getMinutes());
+  document.write("分")
+  document.write(d.getSeconds());
+  document.write("秒")
+  document.write(d.getMilliseconds());
+  document.write("ミリ秒")
+  </script>
+  <div id="test"></div>
+
+  <script src="script.js"></script>
+</head>
+</body>
+</html>
