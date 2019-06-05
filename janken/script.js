@@ -8,9 +8,8 @@ for (var i=0; i <3; i++) {
     machineHand = Math.floor( Math.random() * (3))
     result = (userHand - machineHand + 3) % 3
     prepareAudio.src = 'audio/prepare.mp3'
+    machine_hand_area.children[0].src = "images/prepare.jpg"
     prepareAudio.play();
-    var waitTime = 2000
-    setTimeout(displayMachineHand, waitTime, machineHand)
   }, false);
 }
 
@@ -18,8 +17,11 @@ prepareAudio.addEventListener('ended',
   judgeResult, false);
 
 function judgeResult(){
+  displayMachineHand(machineHand)
   if (result == 0){
-    alert("あいこ！もう一回勝負！")
+    // if alert() is called immediately, Sazaesan picture won't update before the alert and it is confusing for the user.
+    // So, wait 100 ms before the alert and let the picture update.
+    setTimeout(alert, 100, "あいこ！もう一回勝負！")
   } else if (result == 1 ) {
     prepareAudio.src = 'audio/lose_sound.mp3'
     prepareAudio.play()
