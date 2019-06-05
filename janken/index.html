@@ -1,16 +1,23 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width" />
-  <title>�A���P�[�g</title>
-<link rel="stylesheet" href="http://www.crazyprograms.co.nf/style.css" />
-</head>
-
-<body>
-<h1></h1>
-
-  <script src="script.js"></script>
-
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="index.css">
+    <title>じゃんけん</title>
+  </head>
+  <body>
+    <div id="machine_hand_area">
+      <img src="images/prepare.jpg" alt="じゃんけん用意">
+    </div>
+    <div class="hands-wrapper">
+      <div class="hands">
+        <div id="rock" class=hand data-hand=0>✊</div>
+        <div id="scissors" class=hand data-hand=1>✌️</div>
+        <div id="paper" class=hand data-hand=2>🖐</div>
+      </div>
+      <div id="user_hand_area"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>

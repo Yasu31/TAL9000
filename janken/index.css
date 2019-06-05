@@ -1,0 +1,38 @@
+.hand, #user_hand_area {
+  width: 200px;
+  height: 100px;
+  font-size: 80px;
+}
+
+#machine_hand_area {
+  height: 400px;
+}
+#machine_hand_area img {
+  height: 400px;
+}
+
+#user_hand_area {
+  font-size: 120px;
+}
+.hands-wrapper {
+  display: flex;
+}
+
+#rock {
+  background: blue;
+}
+#scissors {
+  background: red;
+}
+
+#paper {
+  background: green;
+}
+
+
+.win {
+  background: lightgreen;
+}
+.lose {
+  background: #444;
+}
