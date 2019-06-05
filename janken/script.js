@@ -1,6 +1,4 @@
 prepareAudio = new Audio('audio/prepare.mp3')
-loseSound = new Audio('audio/lose_sound.mp3')
-winSound = new Audio('audio/win_sound.mp3')
 
 for (var i=0; i <3; i++) {
   document.getElementsByClassName("hand")[i].addEventListener("click", function(e){
@@ -9,11 +7,13 @@ for (var i=0; i <3; i++) {
     displayUserHand(userHand)
     machineHand = Math.floor( Math.random() * (3))
     result = (userHand - machineHand + 3) % 3
+    prepareAudio.src = 'audio/prepare.mp3'
     prepareAudio.play();
     var waitTime = 2000
     setTimeout(displayMachineHand, waitTime, machineHand)
   }, false);
 }
+
 prepareAudio.addEventListener('ended',
   judgeResult, false);
 
@@ -21,12 +21,15 @@ function judgeResult(){
   if (result == 0){
     alert("あいこ！もう一回勝負！")
   } else if (result == 1 ) {
-    loseSound.play()
+    prepareAudio.src = 'audio/lose_sound.mp3'
+    prepareAudio.play()
     document.body.classList.add("lose")
-  } else {
-    winSound.play()
+  } else if (result == 2){
+    prepareAudio.src = 'audio/win_sound.mp3'
+    prepareAudio.play()
     document.body.classList.add("win")
   }
+  result = -1
 }
 
 function displayUserHand(u_hand){
