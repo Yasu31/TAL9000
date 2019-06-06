@@ -4,13 +4,9 @@
   font-size: 80px;
 }
 
-#machine_hand_area {
-  height: 400px;
-}
 #machine_hand_area img {
   height: 400px;
 }
-
 #user_hand_area {
   font-size: 120px;
 }
@@ -24,11 +20,9 @@
 #scissors {
   background: red;
 }
-
 #paper {
   background: green;
 }
-
 
 .win {
   background: lightgreen;
