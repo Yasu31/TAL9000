@@ -1,37 +1,47 @@
-prepareAudio = new Audio('audio/prepare.mp3')
+var audioManager = new Audio();
+var canAudioPlay = true;
 
-for (var i=0; i <3; i++) {
-  document.getElementsByClassName("hand")[i].addEventListener("click", function(e){
-    document.body.classList = []
-    userHand = e.target.getAttribute('data-hand');
-    displayUserHand(userHand)
-    machineHand = Math.floor( Math.random() * (3))
-    result = (userHand - machineHand + 3) % 3
-    prepareAudio.src = 'audio/prepare.mp3'
-    machine_hand_area.children[0].src = "images/prepare.jpg"
-    prepareAudio.play();
-  }, false);
+function playSound(src) {
+  if (!canAudioPlay) {return;}
+  audioManager.src = "audio/" + src
+  audioManager.play()
 }
 
-prepareAudio.addEventListener('ended',
-  judgeResult, false);
+function setEventHandler() {
+  audioManager.addEventListener('ended',
+    processWithResult, false);
 
-function judgeResult(){
+  $hands = document.getElementsByClassName("hand")
+  for (var i=0; i < $hands.length; i++) {
+    $hands[i].addEventListener("click", function(e){
+      // reset the state
+      document.body.classList = []
+      machine_hand_area.children[0].src = "images/prepare.jpg"
+      canAudioPlay = true
+
+      // jenken process
+      userHand = e.target.getAttribute('data-hand');
+      machineHand = Math.floor( Math.random() * (3))
+      displayUserHand(userHand)
+      result = (userHand - machineHand + 3) % 3
+      playSound('prepare.mp3')
+    }, false);
+  }
+}
+
+function processWithResult(){
   displayMachineHand(machineHand)
   if (result == 0){
-    // if alert() is called immediately, Sazaesan picture won't update before the alert and it is confusing for the user.
-    // So, wait 100 ms before the alert and let the picture update.
+    // Wait 100 ms to let the result picture update before alert.
     setTimeout(alert, 100, "あいこ！もう一回勝負！")
   } else if (result == 1 ) {
-    prepareAudio.src = 'audio/lose_sound.mp3'
-    prepareAudio.play()
+    playSound('lose_sound.mp3')
     document.body.classList.add("lose")
   } else if (result == 2){
-    prepareAudio.src = 'audio/win_sound.mp3'
-    prepareAudio.play()
+    playSound('win_sound.mp3')
     document.body.classList.add("win")
   }
-  result = -1
+  canAudioPlay = false
 }
 
 function displayUserHand(u_hand){
@@ -42,7 +52,9 @@ function displayUserHand(u_hand){
 
 function displayMachineHand(m_hand){
   var machine_hand_area = document.getElementById("machine_hand_area")
-  var imagePrefix = "images/"
+  var dirPrefix = "images/"
   var m_hands = ["rock.jpg", "scissors.jpg", "paper.jpg"]
-  machine_hand_area.children[0].src = imagePrefix + m_hands[m_hand]
+  machine_hand_area.children[0].src = dirPrefix + m_hands[m_hand]
 }
+
+setEventHandler()
