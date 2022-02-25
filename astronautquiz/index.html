@@ -1,6 +1,22 @@
 <!doctype html>
 <html>
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113515145-1"></script>
+  <script>
+    // check to ignore localhost traffic, from https://stackoverflow.com/questions/40297763/how-to-disable-google-analytics-on-localhost
+    var host = window.location.hostname;
+    if(host != "localhost")
+    {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113515145-1');
+      // to ignore spam:
+      // https://carloseo.com/removing-google-analytics-spam/
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width" />
   <title>宇宙飛行士診断</title>
