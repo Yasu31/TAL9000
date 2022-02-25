@@ -1,6 +1,6 @@
 ﻿var Seq=new Array();
 for(C=0; C>=0; C++){
-T=prompt(C+1+"番目の数は？(十分入れたらキャンセル)")
+T=prompt(C+1+"番目の数は？(半角数字を入力)(十分入れたらキャンセルを押す)")
 if(T!=null){
 Seq.push(Number(T));}
 else{break;}

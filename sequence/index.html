@@ -1,6 +1,22 @@
 ﻿<!doctype html>
 <html>
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113515145-1"></script>
+  <script>
+    // check to ignore localhost traffic, from https://stackoverflow.com/questions/40297763/how-to-disable-google-analytics-on-localhost
+    var host = window.location.hostname;
+    if(host != "localhost")
+    {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-113515145-1');
+      // to ignore spam:
+      // https://carloseo.com/removing-google-analytics-spam/
+    }
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width" />
   <title>数列 自動判定</title>
@@ -9,13 +25,18 @@
 <body>
   <h1>その数列を解いてみせる！</h1>
   <div id="test"></div><center>
-<input type="button" value="リロード" onClick="location.reload()"><br><br>
+<input type="button" value="もう一回" onClick="location.reload()"><br><br>
 <input type='button' value='数列を調べる' onClick='func()'>
-<input type='button' value='数列の和' onClick='sum()'><hr>
+<input type='button' value='数列の和を調べる' onClick='sum()'><hr>
 
   <script src="script.js"></script><hr>
 <input type='button' value='数列を調べる' onClick='func()'>
 <input type='button' value='数列の和' onClick='sum()'><hr>
 </center>
+<br>
+<p>2022年02月追記: 最近、数列の一般項を求めようとこちらへアクセスする方が増えているようで嬉しいのですが、このページは10年前くらいに高校生の時に、ほぼネタ(＆プログラミングの練習)として書いたプログラムなのであまり便利な機能とかには期待しないでください。間違えて判定してしまう場合もあると思います。このページのソースコードは<a href="https://github.com/Yasu31/TAL9000/tree/master/sequence">GitHubで公開されてる</a>ので改造してみたい物好きな人はぜひ編集してプルリクでも送ってください。</p>
+
+<p>他にも<a href="/TAL9000">色々なくだらないプログラム</a>作っていたので見てみてください。今はロボットを研究している大学院生やってます(私のプロフィールは<a href="/">こちらから</a>)。</p>
+
 </body>
 </html>
