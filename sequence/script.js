@@ -1,8 +1,8 @@
 var Seq = new Array();
 for (C = 0; C >= 0; C++) {
-	T = prompt(C + 1 + "番目の数は？(半角数字を入力)(十分入れたらキャンセルを押す)")
+	T = prompt(C + 1 + "番目の数を入力→OKを押す)(判定開始→キャンセルを押す)")
 	if (T != null) {
-		Seq.push(Number(T));
+		Seq.push(Number(sanitizeInput(T)));
 	}
 	else { break; }
 }      //saves numbers in sequence
@@ -109,7 +109,7 @@ if (isZen) {
 	}
 }   //fills in Seq till 100
 
-for (T = 0; T < Seq.length; T++) {
+for (T = 0; T < 15; T++) {
 	var U = Number(T) + 1;
 	document.write("<br>a<sub>" + U + "</sub>= " + Seq[T])
 }/*lists all the nums in sequence*/
@@ -172,3 +172,12 @@ function refreshTweetText(text) {
     twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="数列判定" data-size="large" lang="ja"/>';
     twitterContainer.getElementsByTagName("a")[0].setAttribute("data-text", text);
 };
+
+/**
+ * convert zenkaku to hankaku
+ */
+function sanitizeInput(str) {
+    return str.replace(/[０-９]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
+}
