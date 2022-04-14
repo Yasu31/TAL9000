@@ -24,12 +24,16 @@
   <!-- adsense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9028853950087862"
     crossorigin="anonymous"></script>
+
+  <meta name="twitter:title" content="数列判定AI: その数列を解いてみせる！" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="https://yasunori.xyz/submit_timer/image.png" />
 </head>
 
 <body>
-  <h1>その数列を解いてみせる！</h1>
+  <h1>数列判定AI:その数列を解いてみせる！</h1>
   <p>2022年02月追記:
-    最近、なぜだかこのページへのアクセスが増えているようで嬉しいのですが、これは10年前くらいに高校生の時に、ほぼネタ(＆プログラミングの練習)として書いたプログラムなので正確性には期待しないでください。ソースコードは<a
+    最近、なぜだかこのページへのアクセスが増えているようで嬉しいのですが、これは10年前くらいに高校生の時に、ほぼネタ(＆プログラミングの練習)として書いたプログラムほぼそのままなので正確性には期待しないでください。ソースコードは<a
       href="https://github.com/Yasu31/TAL9000/tree/master/sequence">GitHubで公開されてる</a>ので改造してみたい物好きな人はぜひ編集してプルリクでも送ってください。
   </p>
 
@@ -41,6 +45,28 @@
     <input type='button' value='数列を調べる' onClick='func()'>
     <input type='button' value='数列の和を調べる' onClick='sum()'>
     <hr>
+
+    <!-- div so that the two SNS buttons can be on the same line (combined with width:50%; float:left of the SNS button divs) -->
+    <div>
+      <!-- tweet button -->
+      <div id="twitter_container" style="width:50%; float:left"></div>
+      <script>
+        window.twttr = (function (d, s, id) {
+          var t, js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return; js = d.createElement(s); js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+          return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
+        }(document, "script", "twitter-wjs"));
+      </script>
+
+      <!-- LINE share button -->
+      <!-- not visible when accessing this HTML as a local file -->
+      <div class="line-it-button" data-lang="ja" data-type="share-a" data-env="REAL"
+        data-url="https://yasunori.xyz/TAL9000/sequence" data-color="default" data-size="large" data-count="false"
+        data-message="testtest" data-ver="3" style="display: none; width:50%; float:left"></div>
+      <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async"
+        defer="defer"></script>
+    </div>
 
     <script src="script.js"></script>
     <hr>

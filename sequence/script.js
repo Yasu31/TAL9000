@@ -1,4 +1,4 @@
-﻿var Seq = new Array();
+var Seq = new Array();
 for (C = 0; C >= 0; C++) {
 	T = prompt(C + 1 + "番目の数は？(半角数字を入力)(十分入れたらキャンセルを押す)")
 	if (T != null) {
@@ -14,14 +14,14 @@ if (Seq.length === 0) {
 if (isGeo(Seq) === true) {
 	var coef = Seq[1] / Seq[0];
 	var cons = 0;
-	document.write("初項が" + Seq[0] + "、公比が" + coef + "の等比数列だね");
+	answerText = "初項が" + Seq[0] + "、公比が" + coef + "の等比数列だね";
 	var isZen = true;
 }
 
 else if (isDif(Seq)) {
 	var coef = 1;
 	var cons = Seq[1] - Seq[0];
-	document.write("初項が" + Seq[0] + "、公差が" + cons + "の等差数列だね");
+	answerText = "初項が" + Seq[0] + "、公差が" + cons + "の等差数列だね";
 	var isZen = true
 }
 
@@ -29,7 +29,7 @@ else if (isSquare(Seq)) {
 
 	var coef = 1;
 	var cons = Math.sqrt(Seq[1]) - Math.sqrt(Seq[0]);
-	document.write("初項が" + Math.sqrt(Seq[0]) + "、公差が" + cons + "の等差数列の各項を2乗した数列でしょ");
+	answerText = "初項が" + Math.sqrt(Seq[0]) + "、公差が" + cons + "の等差数列の各項を2乗した数列でしょ";
 	for (C = Seq.length; C < 100; C++) {
 		var temp = Math.sqrt(Seq[C - 1]) + cons;
 		Seq.push(temp * temp)
@@ -40,9 +40,9 @@ else if (isSquare(Seq)) {
 
 else if (isFibo(Seq)) {
 	if (Seq[0] === 1 && Seq[1] === 1) {
-		document.write("フィボナッチ数列とはあくどい…(T ^ T)<hr>");
+		document.write("フィボナッチ数列とはあざとい…(T ^ T)<hr>");
 	}
-	document.write("a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub><br>という漸化式で表せるね（ドヤ）<hr>")
+	answerText = "a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub><br>という漸化式で表せるね（ドヤ）<hr>";
 	for (C = 1; C < 40; C++) {
 		Seq.push(Seq[Seq.length - 1] + Seq[Seq.length - 2])
 	}  //fills in array
@@ -59,20 +59,21 @@ else {
 	//項のあいだの差の数列をつくる（漸化式か調べる時に使用）
 
 	if (!isGeo(Sub)) {
-		document.write("ごめんなさい、現在の私の知識ではわかりません…");
+		answerText = "ごめんなさい、現在の私の知識ではわかりません…";
 	}
 
 	if (isGeo(Sub)) {
 		var coef = Sub[1] / Sub[0];
 		var cons = Seq[1] - coef * Seq[0]
-		document.write("a<sub>n+1</sub>=" + coef + "×a<sub>n</sub>+" + cons + "という漸化式で表せるよ")
+		answerText = "a<sub>n+1</sub>=" + coef + "×a<sub>n</sub>+" + cons + "という漸化式で表せるよ";
 		isZen = true;
 	}
 
 	//add code about sub of sub
 }
 
-
+document.write(answerText);
+refreshTweetText(answerText);
 
 
 if (isZen) {
@@ -164,4 +165,10 @@ function sum() {
 		Sum = Sum + Seq[C];
 	}
 	alert(A + "番目までの項を足したら	、" + Sum + "になるよっ");
+};
+
+function refreshTweetText(text) {
+    const twitterContainer = document.getElementById("twitter_container");
+    twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="数列判定" data-size="large" lang="ja"/>';
+    twitterContainer.getElementsByTagName("a")[0].setAttribute("data-text", text);
 };
