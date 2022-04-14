@@ -1,6 +1,6 @@
 var Seq = new Array();
 for (C = 0; C >= 0; C++) {
-	T = prompt(C + 1 + "番目の数を入力→OKを押す)(判定開始→キャンセルを押す)")
+	T = prompt(C + 1 + "番目の数を入力→OKを押す\n判定開始→キャンセルを押す")
 	if (T != null) {
 		Seq.push(Number(sanitizeInput(T)));
 	}
