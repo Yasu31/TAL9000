@@ -39,10 +39,8 @@ else if (isSquare(Seq)) {
 }
 
 else if (isFibo(Seq)) {
-	if (Seq[0] === 1 && Seq[1] === 1) {
-		document.write("フィボナッチ数列とはあざとい…(T ^ T)<hr>");
-	}
-	answerText = "a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub><br>という漸化式で表せるね（ドヤ）<hr>";
+	answerText = "フィボナッチ数列とはあざとい…(T ^ T)";
+	document.write("a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub><br>という漸化式で表せるね（ドヤ）<hr>");
 	for (C = 1; C < 40; C++) {
 		Seq.push(Seq[Seq.length - 1] + Seq[Seq.length - 2])
 	}  //fills in array
