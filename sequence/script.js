@@ -1,116 +1,133 @@
-var Seq = new Array();
-for (C = 0; C >= 0; C++) {
-	T = prompt(C + 1 + "番目の数を入力→OKを押す\n判定開始→キャンセルを押す")
-	if (T != null) {
-		Seq.push(Number(sanitizeInput(T)));
+var Seq = [];  // global variable to keep track of sequence input by user so far
+function addToSequence() {
+	var input = document.getElementById('sequenceInput');
+	var number = Number(sanitizeInput(input.value));
+	if (!isNaN(number)) {
+		Seq.push(number);
+		
+		// print the sequence input so far
+		show_input_sofar_str = ""
+		Seq.forEach(function(value, index) {
+			show_input_sofar_str += "<br>a<sub>" + (index + 1) + "</sub>= " + value;
+		});
+		document.getElementById("sequenceOutput").innerHTML = show_input_sofar_str;
+
+		input.value = ''; // Clear the input
+		input.focus(); // Keep focus on input for next entry
+	} else {
+		alert('Please enter a valid number');
 	}
-	else { break; }
-}      //saves numbers in sequence
-
-if (Seq.length === 0) {
-	alert("ちゃんと入力してくれっ!!")
-};
-
-if (isGeo(Seq) === true) {
-	var coef = Seq[1] / Seq[0];
-	var cons = 0;
-	answerText = "初項が" + Seq[0] + "、公比が" + coef + "の等比数列だね";
-	var isZen = true;
 }
 
-else if (isDif(Seq)) {
-	var coef = 1;
-	var cons = Seq[1] - Seq[0];
-	answerText = "初項が" + Seq[0] + "、公差が" + cons + "の等差数列だね";
-	var isZen = true
-}
-
-else if (isSquare(Seq)) {
-
-	var coef = 1;
-	var cons = Math.sqrt(Seq[1]) - Math.sqrt(Seq[0]);
-	answerText = "初項が" + Math.sqrt(Seq[0]) + "、公差が" + cons + "の等差数列の各項を2乗した数列でしょ";
-	for (C = Seq.length; C < 100; C++) {
-		var temp = Math.sqrt(Seq[C - 1]) + cons;
-		Seq.push(temp * temp)
+function computeSequence() {
+	if (Seq.length === 0) {
+		alert("Please enter at least one number.");
+		return;
 	}
-	var isZen = true;
-	var isS = true;
-}
-
-else if (isFibo(Seq)) {
-	answerText = "フィボナッチ数列とはあざとい…(T ^ T)";
-	document.write("a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub><br>という漸化式で表せるね（ドヤ）<hr>");
-	for (C = 1; C < 40; C++) {
-		Seq.push(Seq[Seq.length - 1] + Seq[Seq.length - 2])
-	}  //fills in array
-}
-
-/*add items here if you want more types of sequences to be recognizable*/
-
-
-else {
-	var Sub = new Array();
-	for (C = 1; C < Seq.length; C++) {
-		Sub.push(Seq[C] - Seq[C - 1]);
-	}
-	//項のあいだの差の数列をつくる（漸化式か調べる時に使用）
-
-	if (!isGeo(Sub)) {
-		answerText = "ごめんなさい、現在の私の知識ではわかりません…";
+	if (isGeo(Seq) === true) {
+		var coef = Seq[1] / Seq[0];
+		var cons = 0;
+		answerText = "初項が" + Seq[0] + "、公比が" + coef + "の等比数列だね";
+		var isZen = true;
 	}
 
-	if (isGeo(Sub)) {
-		var coef = Sub[1] / Sub[0];
-		var cons = Seq[1] - coef * Seq[0]
-		answerText = "a<sub>n+1</sub>=" + coef + "×a<sub>n</sub>+" + cons + "という漸化式で表せるよ";
-		isZen = true;
+	else if (isDif(Seq)) {
+		var coef = 1;
+		var cons = Seq[1] - Seq[0];
+		answerText = "初項が" + Seq[0] + "、公差が" + cons + "の等差数列だね";
+		var isZen = true
 	}
 
-	//add code about sub of sub
-}
+	else if (isSquare(Seq)) {
 
-document.write(answerText);
-refreshTweetText(answerText);
-
-
-if (isZen) {
-	if (coef != 1) {
-		var G = cons / (1 - coef);
-		var F = Seq[0] - G;
-
-		if (G === 0) { G = ""; }
-		if (G > 0) { G = "+" + G; }
-		if (F === 1) { F = ""; } else { F = F + "×"; }
-		//fixes display problems
-		document.write("<hr>一般項<br><font size=20>" + F + coef + "<sup>n-1</sup>" + G + "</font><hr>");
+		var coef = 1;
+		var cons = Math.sqrt(Seq[1]) - Math.sqrt(Seq[0]);
+		answerText = "初項が" + Math.sqrt(Seq[0]) + "、公差が" + cons + "の等差数列の各項を2乗した数列でしょ";
+		for (C = Seq.length; C < 100; C++) {
+			var temp = Math.sqrt(Seq[C - 1]) + cons;
+			Seq.push(temp * temp)
+		}
+		var isZen = true;
+		var isS = true;
 	}
+
+	else if (isFibo(Seq)) {
+		answerText = "フィボナッチ数列とはあざとい…(T ^ T)";
+		answerText += "a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub><br>という漸化式で表せるね（ドヤ）<hr>";
+		for (C = 1; C < 40; C++) {
+			Seq.push(Seq[Seq.length - 1] + Seq[Seq.length - 2])
+		}  //fills in array
+	}
+
+	/*add items here if you want more types of sequences to be recognizable*/
+
+
 	else {
-		if (isS) {
-			var G = Math.sqrt(Seq[0]) - cons;
-			var F = cons;
-			if (G === 0) { G = ""; } if (G > 0) { G = "+" + G; }
+		var Sub = new Array();
+		for (C = 1; C < Seq.length; C++) {
+			Sub.push(Seq[C] - Seq[C - 1]);
+		}
+		//項のあいだの差の数列をつくる（漸化式か調べる時に使用）
+
+		if (!isGeo(Sub)) {
+			answerText = "ごめんなさい、現在の私の知識ではわかりません…";
+		}
+
+		if (isGeo(Sub)) {
+			var coef = Sub[1] / Sub[0];
+			var cons = Seq[1] - coef * Seq[0]
+			answerText = "a<sub>n+1</sub>=" + coef + "×a<sub>n</sub>+" + cons + "という漸化式で表せるよ";
+			isZen = true;
+		}
+
+		//add code about sub of sub
+	}
+
+	document.getElementById("sequenceOutput").innerHTML = answerText;
+	refreshTweetText(answerText);
+
+
+	if (isZen) {
+		if (coef != 1) {
+			var G = cons / (1 - coef);
+			var F = Seq[0] - G;
+
+			if (G === 0) { G = ""; }
+			if (G > 0) { G = "+" + G; }
 			if (F === 1) { F = ""; } else { F = F + "×"; }
-			document.write("<hr>一般項<br><font size=20>(" + F + "n" + G + ")<sup>2</sup></font><hr>")
+			//fixes display problems
+			document.getElementById("sequenceOutput").innerHTML += "<hr>一般項<br><font size=20>" + F + coef + "<sup>n-1</sup>" + G + "</font><hr>";
 		}
 		else {
-			var G = Seq[0] - cons;
-			var F = cons;
-			if (F === 1) { F = ""; } else { F = F + "×"; }
-			if (G === 0) { G = ""; } if (G > 0) { G = "+" + G; }
-			document.write("<hr>一般項<br><font size=20>" + F + "n" + G + "</font><hr>")
+			if (isS) {
+				var G = Math.sqrt(Seq[0]) - cons;
+				var F = cons;
+				if (G === 0) { G = ""; } if (G > 0) { G = "+" + G; }
+				if (F === 1) { F = ""; } else { F = F + "×"; }
+				document.getElementById("sequenceOutput").innerHTML += "<hr>一般項<br><font size=20>(" + F + "n" + G + ")<sup>2</sup></font><hr>"
+			}
+			else {
+				var G = Seq[0] - cons;
+				var F = cons;
+				if (F === 1) { F = ""; } else { F = F + "×"; }
+				if (G === 0) { G = ""; } if (G > 0) { G = "+" + G; }
+				document.getElementById("sequenceOutput").innerHTML += "<hr>一般項<br><font size=20>" + F + "n" + G + "</font><hr>"
+			}
 		}
-	}
 
-	for (i = Seq.length; i < 100; i++) {
-		Seq.push(Seq[i - 1] * coef + cons);
-	}
-}   //fills in Seq till 100
+		for (i = Seq.length; i < 100; i++) {
+			Seq.push(Seq[i - 1] * coef + cons);
+		}
+	}   //fills in Seq till 100
 
-for (T = 0; T < 15; T++) {
-	var U = Number(T) + 1;
-	document.write("<br>a<sub>" + U + "</sub>= " + Seq[T])
-}/*lists all the nums in sequence*/
+	for (T = 0; T < 15; T++) {
+		var U = Number(T) + 1;
+		document.getElementById("sequenceOutput").innerHTML += "<br>a<sub>" + U + "</sub>= " + Seq[T]
+	}/*lists all the nums in sequence*/
+
+	// reset sequence
+	Seq = [];
+}
 
 //end of main function
 
@@ -166,16 +183,16 @@ function sum() {
 };
 
 function refreshTweetText(text) {
-    const twitterContainer = document.getElementById("twitter_container");
-    twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="数列判定" data-size="large" lang="ja"/>';
-    twitterContainer.getElementsByTagName("a")[0].setAttribute("data-text", text);
+	const twitterContainer = document.getElementById("twitter_container");
+	twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="数列判定" data-size="large" lang="ja"/>';
+	twitterContainer.getElementsByTagName("a")[0].setAttribute("data-text", text);
 };
 
 /**
  * convert zenkaku to hankaku
  */
 function sanitizeInput(str) {
-    return str.replace(/[０-９]/g, function(s) {
-        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
+	return str.replace(/[０-９]/g, function (s) {
+		return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+	});
 }
