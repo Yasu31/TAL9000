@@ -6,7 +6,11 @@ function addToSequence() {
 		Seq.push(number);
 		
 		// print the sequence input so far
-		document.getElementById("sequenceOutput").innerHTML += "<br>a<sub>" + Seq.length + "</sub>= " + number;
+		var sequenceHTML = "";
+		for (var i = 0; i < Seq.length; i++) {
+			sequenceHTML += "<br>a<sub>" + (i + 1) + "</sub>= " + Seq[i];
+		}
+		document.getElementById("sequenceOutput").innerHTML = sequenceHTML;
 		document.getElementById("text_before_sequenceInput").innerHTML = "<b>a<sub>" + (Seq.length + 1) + " </sub></b>= ";
 
 		input.value = ''; // Clear the input
