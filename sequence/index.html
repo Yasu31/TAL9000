@@ -61,37 +61,17 @@
       <hr />
 
       <span id="text_before_sequenceInput"
-        >a<b><sub>1</sub></b
-        >=</span
+        ><b>a<sub>1</sub></b
+        > = </span
       ><input type="number" id="sequenceInput" placeholder="数字を入力" />
       <input type="button" value="数列に追加" onclick="addToSequence()" />
       <input type="button" value="数列判定実行！" onclick="computeSequence()" />
-
+      <br />
+      <br />
       <!-- div so that the two SNS buttons can be on the same line (combined with width:50%; float:left of the SNS button divs) -->
       <div>
         <!-- tweet button -->
-        <div id="twitter_container" style="width: 50%; float: left"></div>
-        <script>
-          window.twttr = (function (d, s, id) {
-            var t,
-              js,
-              fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
-            return (
-              window.twttr ||
-              (t = {
-                _e: [],
-                ready: function (f) {
-                  t._e.push(f);
-                },
-              })
-            );
-          })(document, "script", "twitter-wjs");
-        </script>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="AIで数列を自動判定しよう！" data-url="https://yasunori.xyz/TAL9000/sequence/index.html" data-hashtags="数列判定AI" data-lang="ja" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         <!-- LINE share button -->
         <!-- not visible when accessing this HTML as a local file -->

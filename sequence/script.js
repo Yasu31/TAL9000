@@ -7,7 +7,7 @@ function addToSequence() {
 		
 		// print the sequence input so far
 		document.getElementById("sequenceOutput").innerHTML += "<br>a<sub>" + Seq.length + "</sub>= " + number;
-		document.getElementById("text_before_sequenceInput").innerHTML = "<br>a<sub>" + (Seq.length + 1) + " </sub></b>= ";
+		document.getElementById("text_before_sequenceInput").innerHTML = "<b>a<sub>" + (Seq.length + 1) + " </sub></b>= ";
 
 		input.value = ''; // Clear the input
 		input.focus(); // Keep focus on input for next entry
@@ -81,7 +81,6 @@ function computeSequence() {
 	}
 
 	document.getElementById("sequenceOutput").innerHTML = answerText;
-	refreshTweetText(answerText);
 
 
 	if (isZen) {
@@ -117,14 +116,14 @@ function computeSequence() {
 		}
 	}   //fills in Seq till 100
 
-	for (T = 0; T < 15; T++) {
+	for (T = 0; T < 30; T++) {
 		var U = Number(T) + 1;
 		document.getElementById("sequenceOutput").innerHTML += "<br>a<sub>" + U + "</sub>= " + Seq[T]
 	}/*lists all the nums in sequence*/
 
 	// reset sequence
 	Seq = [];
-	document.getElementById("text_before_sequenceInput").innerHTML = "<br>a<sub>1</sub>= ";
+	document.getElementById("text_before_sequenceInput").innerHTML = "<b>a<sub>1</sub></b> = ";
 }
 
 //end of main function
@@ -178,12 +177,6 @@ function sum() {
 		Sum = Sum + Seq[C];
 	}
 	alert(A + "番目までの項を足したら	、" + Sum + "になるよっ");
-};
-
-function refreshTweetText(text) {
-	const twitterContainer = document.getElementById("twitter_container");
-	twitterContainer.innerHTML = '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="数列判定" data-size="large" lang="ja"/>';
-	twitterContainer.getElementsByTagName("a")[0].setAttribute("data-text", text);
 };
 
 /**
