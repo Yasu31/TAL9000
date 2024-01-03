@@ -1,99 +1,381 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 <html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-113515145-1"
+    ></script>
+    <script>
+      // check to ignore localhost traffic, from https://stackoverflow.com/questions/40297763/how-to-disable-google-analytics-on-localhost
+      var host = window.location.hostname;
+      if (host != "localhost") {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
 
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113515145-1"></script>
-  <script>
-    // check to ignore localhost traffic, from https://stackoverflow.com/questions/40297763/how-to-disable-google-analytics-on-localhost
-    var host = window.location.hostname;
-    if (host != "localhost") {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
+        gtag("config", "UA-113515145-1");
+        // to ignore spam:
+        // https://carloseo.com/removing-google-analytics-spam/
+      }
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>数列 自動判定</title>
+    <link rel="stylesheet" href="../styles.css" />
 
-      gtag('config', 'UA-113515145-1');
-      // to ignore spam:
-      // https://carloseo.com/removing-google-analytics-spam/
-    }
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width" />
-  <title>数列 自動判定</title>
-  <link rel="stylesheet" href="../styles.css" />
+    <meta name="twitter:title" content="数列判定AI: その数列を解いてみせる！" />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:image"
+      content="https://yasunori.xyz/submit_timer/image.png"
+    />
+  </head>
 
-  <meta name="twitter:title" content="数列判定AI: その数列を解いてみせる！" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:image" content="https://yasunori.xyz/submit_timer/image.png" />
-</head>
+  <body>
+    <h1>数列判定AI:その数列を解いてみせる！</h1>
 
-<body>
-  <h1>数列判定AI:その数列を解いてみせる！</h1>
-  
-  <!-- adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9028853950087862"
-     crossorigin="anonymous"></script>
-  <ins class="adsbygoogle"
-      style="display:block"
+    <!-- adsense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9028853950087862"
+      crossorigin="anonymous"
+    ></script>
+    <ins
+      class="adsbygoogle"
+      style="display: block"
       data-ad-format="autorelaxed"
       data-ad-client="ca-pub-9028853950087862"
-      data-ad-slot="7726765984"></ins>
-  <script>
+      data-ad-slot="7726765984"
+    ></ins>
+    <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+    </script>
 
-  <center>
-    <hr>
+    <center>
+      <hr />
 
-    <input type="button" value="リセット" onClick="location.reload()">
-    <input type='button' value='x番目の値を計算' onClick='func()'>
-    <input type='button' value='数列の和を計算' onClick='sum()'>
+      <input type="button" value="リセット" onClick="location.reload()" />
+      <input type="button" value="x番目の値を計算" onClick="func()" />
+      <input type="button" value="数列の和を計算" onClick="sum()" />
 
-    <!-- div so that the two SNS buttons can be on the same line (combined with width:50%; float:left of the SNS button divs) -->
-    <div>
-      <!-- tweet button -->
-      <div id="twitter_container" style="width:50%; float:left"></div>
+      <!-- div so that the two SNS buttons can be on the same line (combined with width:50%; float:left of the SNS button divs) -->
+      <div>
+        <!-- tweet button -->
+        <div id="twitter_container" style="width: 50%; float: left"></div>
+        <script>
+          window.twttr = (function (d, s, id) {
+            var t,
+              js,
+              fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            return (
+              window.twttr ||
+              (t = {
+                _e: [],
+                ready: function (f) {
+                  t._e.push(f);
+                },
+              })
+            );
+          })(document, "script", "twitter-wjs");
+        </script>
+
+        <!-- LINE share button -->
+        <!-- not visible when accessing this HTML as a local file -->
+        <div
+          class="line-it-button"
+          data-lang="ja"
+          data-type="share-a"
+          data-env="REAL"
+          data-url="https://yasunori.xyz/TAL9000/sequence"
+          data-color="default"
+          data-size="large"
+          data-count="false"
+          data-message="testtest"
+          data-ver="3"
+          style="display: none; width: 50%; float: left"
+        ></div>
+        <script
+          src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js"
+          async="async"
+          defer="defer"
+        ></script>
+      </div>
+
       <script>
-        window.twttr = (function (d, s, id) {
-          var t, js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return; js = d.createElement(s); js.id = id;
-          js.src = "https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-          return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
-        }(document, "script", "twitter-wjs"));
+        var Seq = new Array();
+        for (C = 0; C >= 0; C++) {
+          T = prompt(
+            C + 1 + "番目の数を入力→OKを押す\n判定開始→キャンセルを押す"
+          );
+          if (T != null) {
+            Seq.push(Number(sanitizeInput(T)));
+          } else {
+            break;
+          }
+        } //saves numbers in sequence
+
+        if (Seq.length === 0) {
+          alert("ちゃんと入力してくれっ!!");
+        }
+
+        if (isGeo(Seq) === true) {
+          var coef = Seq[1] / Seq[0];
+          var cons = 0;
+          answerText = "初項が" + Seq[0] + "、公比が" + coef + "の等比数列だね";
+          var isZen = true;
+        } else if (isDif(Seq)) {
+          var coef = 1;
+          var cons = Seq[1] - Seq[0];
+          answerText = "初項が" + Seq[0] + "、公差が" + cons + "の等差数列だね";
+          var isZen = true;
+        } else if (isSquare(Seq)) {
+          var coef = 1;
+          var cons = Math.sqrt(Seq[1]) - Math.sqrt(Seq[0]);
+          answerText =
+            "初項が" +
+            Math.sqrt(Seq[0]) +
+            "、公差が" +
+            cons +
+            "の等差数列の各項を2乗した数列でしょ";
+          for (C = Seq.length; C < 100; C++) {
+            var temp = Math.sqrt(Seq[C - 1]) + cons;
+            Seq.push(temp * temp);
+          }
+          var isZen = true;
+          var isS = true;
+        } else if (isFibo(Seq)) {
+          answerText = "フィボナッチ数列とはあざとい…(T ^ T)";
+          document.write(
+            "a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub><br>という漸化式で表せるね（ドヤ）<hr>"
+          );
+          for (C = 1; C < 40; C++) {
+            Seq.push(Seq[Seq.length - 1] + Seq[Seq.length - 2]);
+          } //fills in array
+        } else {
+
+        /*add items here if you want more types of sequences to be recognizable*/
+          var Sub = new Array();
+          for (C = 1; C < Seq.length; C++) {
+            Sub.push(Seq[C] - Seq[C - 1]);
+          }
+          //項のあいだの差の数列をつくる（漸化式か調べる時に使用）
+
+          if (!isGeo(Sub)) {
+            answerText = "ごめんなさい、現在の私の知識ではわかりません…";
+          }
+
+          if (isGeo(Sub)) {
+            var coef = Sub[1] / Sub[0];
+            var cons = Seq[1] - coef * Seq[0];
+            answerText =
+              "a<sub>n+1</sub>=" +
+              coef +
+              "×a<sub>n</sub>+" +
+              cons +
+              "という漸化式で表せるよ";
+            isZen = true;
+          }
+
+          //add code about sub of sub
+        }
+
+        document.write(answerText);
+        refreshTweetText(answerText);
+
+        if (isZen) {
+          if (coef != 1) {
+            var G = cons / (1 - coef);
+            var F = Seq[0] - G;
+
+            if (G === 0) {
+              G = "";
+            }
+            if (G > 0) {
+              G = "+" + G;
+            }
+            if (F === 1) {
+              F = "";
+            } else {
+              F = F + "×";
+            }
+            //fixes display problems
+            document.write(
+              "<hr>一般項<br><font size=20>" +
+                F +
+                coef +
+                "<sup>n-1</sup>" +
+                G +
+                "</font><hr>"
+            );
+          } else {
+            if (isS) {
+              var G = Math.sqrt(Seq[0]) - cons;
+              var F = cons;
+              if (G === 0) {
+                G = "";
+              }
+              if (G > 0) {
+                G = "+" + G;
+              }
+              if (F === 1) {
+                F = "";
+              } else {
+                F = F + "×";
+              }
+              document.write(
+                "<hr>一般項<br><font size=20>(" +
+                  F +
+                  "n" +
+                  G +
+                  ")<sup>2</sup></font><hr>"
+              );
+            } else {
+              var G = Seq[0] - cons;
+              var F = cons;
+              if (F === 1) {
+                F = "";
+              } else {
+                F = F + "×";
+              }
+              if (G === 0) {
+                G = "";
+              }
+              if (G > 0) {
+                G = "+" + G;
+              }
+              document.write(
+                "<hr>一般項<br><font size=20>" + F + "n" + G + "</font><hr>"
+              );
+            }
+          }
+
+          for (i = Seq.length; i < 100; i++) {
+            Seq.push(Seq[i - 1] * coef + cons);
+          }
+        } //fills in Seq till 100
+
+        for (T = 0; T < 15; T++) {
+          var U = Number(T) + 1;
+          document.write("<br>a<sub>" + U + "</sub>= " + Seq[T]);
+        } /*lists all the nums in sequence*/
+
+        //end of main function
+
+        function isGeo(A) {
+          var D = A[1] / A[0];
+          for (C = 2; C < A.length; C++) {
+            if (A[C] / A[C - 1] != D) {
+              return false;
+            }
+          }
+          return true;
+        } /*Checks if sequence "A" is geometric*/
+
+        function isDif(A) {
+          var C = A[1] - A[0];
+          for (i = 2; i < A.length; i++) {
+            if (A[i] - A[i - 1] != C) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+        function isSquare(A) {
+          var T = Math.sqrt(A[1]) - Math.sqrt(A[0]);
+          for (C = 2; C < A.length; C++) {
+            if (T != Math.sqrt(A[C]) - Math.sqrt(A[C - 1])) {
+              return false;
+            }
+          }
+          return true;
+        } //checks if it goes like 1,4,9,16,...
+
+        function isFibo(A) {
+          for (C = 3; C < A.length; C++) {
+            if (A[C] != A[C - 1] + A[C - 2]) {
+              return false;
+            }
+          }
+          return true;
+        }
+
+        function func() {
+          var A = prompt(
+            "何番目の数が知りたい？（" + Seq.length + "個目まで）"
+          );
+          alert(A + "番目は" + Seq[A - 1] + "だよっ");
+        }
+
+        function sum() {
+          var Sum = 0;
+          var A = prompt(
+            "何番目の数までの和が知りたい？（" + Seq.length + "個目まで）"
+          );
+          for (C = 0; C < A; C++) {
+            Sum = Sum + Seq[C];
+          }
+          alert(A + "番目までの項を足したら	、" + Sum + "になるよっ");
+        }
+
+        function refreshTweetText(text) {
+          const twitterContainer = document.getElementById("twitter_container");
+          twitterContainer.innerHTML =
+            '<a class="twitter-share-button" id="tweet_button" href="https://twitter.com/intent/tweet" data-hashtags="数列判定" data-size="large" lang="ja"/>';
+          twitterContainer
+            .getElementsByTagName("a")[0]
+            .setAttribute("data-text", text);
+        }
+
+        /**
+         * convert zenkaku to hankaku
+         */
+        function sanitizeInput(str) {
+          return str.replace(/[０-９]/g, function (s) {
+            return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+          });
+        }
       </script>
-
-      <!-- LINE share button -->
-      <!-- not visible when accessing this HTML as a local file -->
-      <div class="line-it-button" data-lang="ja" data-type="share-a" data-env="REAL"
-        data-url="https://yasunori.xyz/TAL9000/sequence" data-color="default" data-size="large" data-count="false"
-        data-message="testtest" data-ver="3" style="display: none; width:50%; float:left"></div>
-      <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async"
-        defer="defer"></script>
-    </div>
-
-    <script src="script.js"></script>
-    <hr>
-  </center>
-  <!-- adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9028853950087862"
-     crossorigin="anonymous"></script>
-  <ins class="adsbygoogle"
-      style="display:block"
+      <hr />
+    </center>
+    <!-- adsense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9028853950087862"
+      crossorigin="anonymous"
+    ></script>
+    <ins
+      class="adsbygoogle"
+      style="display: block"
       data-ad-format="autorelaxed"
       data-ad-client="ca-pub-9028853950087862"
-      data-ad-slot="7726765984"></ins>
-  <script>
+      data-ad-slot="7726765984"
+    ></ins>
+    <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-  <p>2022年02月追記:
-    最近、なぜだかこのページへのアクセスが増えているようで嬉しいのですが、これは10年前くらいに高校生の時に、ほぼネタ(＆プログラミングの練習)として書いたプログラムほぼそのままなので正確性には期待しないでください。ソースコードは<a
-      href="https://github.com/Yasu31/TAL9000/tree/master/sequence">GitHubで公開されてる</a>ので改造してみたい物好きな人はぜひ編集してプルリクでも送ってください。
-  </p>
+    </script>
+    <p>
+      2022年02月追記:
+      最近、なぜだかこのページへのアクセスが増えているようで嬉しいのですが、これは10年前くらいに高校生の時に、ほぼネタ(＆プログラミングの練習)として書いたプログラムほぼそのままなので正確性には期待しないでください。ソースコードは<a
+        href="https://github.com/Yasu31/TAL9000/tree/master/sequence"
+        >GitHubで公開されてる</a
+      >ので改造してみたい物好きな人はぜひ編集してプルリクでも送ってください。
+    </p>
 
-  <p>当時は他にも<a href="../index.html">色々なくだらないプログラム</a>作ってました。今はロボットを研究している大学院生やってます(私のプロフィールは<a href="/">こちらから</a>)。</p>
-
-
-
-</body>
-
+    <p>
+      当時は他にも<a href="../index.html">色々なくだらないプログラム</a
+      >作ってました。今はロボットを研究している大学院生やってます(私のプロフィールは<a
+        href="/"
+        >こちらから</a
+      >)。
+    </p>
+  </body>
 </html>
