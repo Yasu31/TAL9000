@@ -6,11 +6,8 @@ function addToSequence() {
 		Seq.push(number);
 		
 		// print the sequence input so far
-		show_input_sofar_str = ""
-		Seq.forEach(function(value, index) {
-			show_input_sofar_str += "<br>a<sub>" + (index + 1) + "</sub>= " + value;
-		});
-		document.getElementById("sequenceOutput").innerHTML = show_input_sofar_str;
+		document.getElementById("sequenceOutput").innerHTML += "<br>a<sub>" + Seq.length + "</sub>= " + number;
+		document.getElementById("text_before_sequenceInput").innerHTML = "<br>a<sub>" + (Seq.length + 1) + " </sub></b>= ";
 
 		input.value = ''; // Clear the input
 		input.focus(); // Keep focus on input for next entry
@@ -127,6 +124,7 @@ function computeSequence() {
 
 	// reset sequence
 	Seq = [];
+	document.getElementById("text_before_sequenceInput").innerHTML = "<br>a<sub>1</sub>= ";
 }
 
 //end of main function
