@@ -1,0 +1,235 @@
+/* this was just copied from my main website's CSS */
+html {
+    background: transparent;
+    background-image: linear-gradient(45deg, #CBD4C2, #CBD4C2);
+    /* try to change based on season, time etc. https://hugogiraudel.com/2015/01/12/color-clock-experiment/ */
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* color scheme generated at https://coolors.co */
+
+body {
+    margin: 0 auto;
+    max-width: 800px;
+    line-height: 10em;
+    /*font: 1.07em Helvetica, sans-serif;*/
+    font: 1.0em "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    color: #50514F;
+    background: #FFFCFF;
+    padding: 0px 10px;
+}
+
+a:link {
+    color: #247BA0;
+}
+
+a:visited {
+    color: #195975;
+}
+
+a:hover {
+    color: #33b9f2;
+}
+
+p {
+    /* font-size: large; */
+    line-height: 1.8em;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+img {
+    padding: 5px;
+    width: 80%;
+    border-radius: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer img {
+    width: 40px;
+    height: 40px;
+    border-radius: 0px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: none;
+}
+
+header {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 0px 0px;
+    text-align: center;
+}
+
+.data {
+    font-family: monospace;
+}
+
+main {}
+
+
+/*wrap Youtube embedded videos in <div class="videowrapper"> to have it resize*/
+
+.videowrapper {
+    float: none;
+    clear: both;
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+}
+
+.videowrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* lite player for Youtube https://www.labnol.org/internet/light-youtube-embeds/27941/ */
+.youtube-player {
+    float: none;
+    clear: both;
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    background: #000;
+  }
+  .youtube-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: transparent;
+  }
+
+  .youtube-player img {
+    object-fit: cover;
+    display: block;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    max-width: 100%;
+    width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    height: auto;
+    cursor: pointer;
+    -webkit-transition: 0.4s all;
+    -moz-transition: 0.4s all;
+    transition: 0.4s all;
+  }
+
+  .youtube-player img:hover {
+    -webkit-filter: brightness(75%);
+  }
+
+  .youtube-player .play {
+    height: 72px;
+    width: 72px;
+    left: 50%;
+    top: 50%;
+    margin-left: -36px;
+    margin-top: -36px;
+    position: absolute;
+    background: url('//i.imgur.com/TxzC70f.png') no-repeat;
+    cursor: pointer;
+  }
+
+.float_right {
+    /* images that we want to float to the right */
+    float: right;
+    width: 50%;
+}
+
+hr {
+    clear: both;
+    /*without this, <hr> doesn't "break up" sections as intended...*/
+    width: 100%;
+    border: 0px;
+    border-bottom: dotted 10px #C3B299;
+}
+
+
+/* crossfade-related classes
+http://css3.bradshawenterprises.com/cfimg/
+a = 3s, b=4s, n=3
+t = 21s, animation-delay = 7s, animation-duration = 21s */
+
+#ghostHost {
+    position: relative;
+    float: right;
+    width: 50%;
+    /* dirty hack to set div element to the desired aspect ratio */
+    padding-bottom: 80%;
+}
+
+#ghostHost img {
+    position: absolute;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-duration: 35s;
+    animation-delay: 5s;
+    width: 100%;
+}
+
+#ghostHost img:nth-of-type(1) {
+    animation: unset;
+}
+
+#ghostHost img:nth-of-type(2) {
+    animation-name: fadeInOut;
+    opacity: 0;
+}
+
+#ghostHost img:nth-of-type(3) {
+    animation-name: fadeInOut2;
+    opacity: 0;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+@keyframes fadeInOut2 {
+    30% {
+        opacity: 0;
+    }
+    45% {
+        opacity: 1;
+    }
+    55% {
+        opacity: 1;
+    }
+    70%{
+        opacity: 0;
+    }
+}
