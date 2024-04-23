@@ -34,7 +34,7 @@
     />
   </head>
 
-  <body>
+  <body onload="reset()">
     <h1>数列判定AI:その数列を解いてみせる！</h1>
 
 
@@ -42,12 +42,12 @@
     <center>
       <hr />
 
-      <span id="text_before_sequenceInput"
-        ><b>a<sub>1</sub></b
-        > = </span
-      ><input type="number" id="sequenceInput" placeholder="数字を入力" />
-      <input type="button" value="数列に追加" onclick="addToSequence()" />
-      <input type="button" value="数列判定実行！" onclick="computeSequence()" />
+      <span id="text_before_sequenceInput"></span>
+      <input type="number" id="sequenceInput" placeholder="数字を入力" />
+      <br />
+      <input type="button" value="数列に追加" id="addButton" onclick="addToSequence()" />
+      <input type="button" value="判定実行！" id="executeButton" onclick="computeSequence()"/>
+      <input type="button" value="リセット" id="resetButton" onclick="reset()"/>
       <br />
       <br />
       <!-- div so that the two SNS buttons can be on the same line (combined with width:50%; float:left of the SNS button divs) -->
@@ -77,7 +77,19 @@
         ></script>
       </div>
 
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9028853950087862"
+     crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+          style="display:block; text-align:center;"
+          data-ad-layout="in-article"
+          data-ad-format="fluid"
+          data-ad-client="ca-pub-9028853950087862"
+          data-ad-slot="3693089927"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
       <hr />
+
       <!-- show the result here -->
       <div id="sequenceOutput"></div>
     </center>

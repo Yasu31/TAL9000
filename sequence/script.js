@@ -1,6 +1,11 @@
 var Seq = [];  // global variable to keep track of sequence input by user so far
 function addToSequence() {
 	var input = document.getElementById('sequenceInput');
+	if (input.value === '') {
+		// warn user if they try to add an empty input
+		alert('数字を入力してから「数列に追加」を押してね');
+		return;
+	}
 	var number = Number(sanitizeInput(input.value));
 	if (!isNaN(number)) {
 		Seq.push(number);
@@ -15,8 +20,11 @@ function addToSequence() {
 
 		input.value = ''; // Clear the input
 		input.focus(); // Keep focus on input for next entry
+		if (Seq.length >= 2) {
+			document.getElementById("executeButton").disabled = false;
+		}
 	} else {
-		alert('Please enter a valid number');
+		alert('数字を半角で入力してね');
 	}
 }
 
@@ -55,7 +63,7 @@ function computeSequence() {
 	else if (isFibo(Seq)) {
 		answerText = "フィボナッチ数列とはあざとい…(T ^ T)";
 		answerText += "a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub><br>という漸化式で表せるね（ドヤ）<hr>";
-		for (C = 1; C < 40; C++) {
+		for (C = 1; C < 100; C++) {
 			Seq.push(Seq[Seq.length - 1] + Seq[Seq.length - 2])
 		}  //fills in array
 	}
@@ -120,18 +128,28 @@ function computeSequence() {
 		}
 	}   //fills in Seq till 100
 
-	for (T = 0; T < 30; T++) {
+	for (T = 0; T < 100; T++) {
 		var U = Number(T) + 1;
 		document.getElementById("sequenceOutput").innerHTML += "<br>a<sub>" + U + "</sub>= " + Seq[T]
 	}/*lists all the nums in sequence*/
 
-	// reset sequence
-	Seq = [];
-	document.getElementById("text_before_sequenceInput").innerHTML = "<b>a<sub>1</sub></b> = ";
+	// only reset button can be pressed
+	document.getElementById("sequenceInput").disabled = true;
+	document.getElementById("addButton").disabled = true;
+	document.getElementById("executeButton").disabled = true;
+	document.getElementById("resetButton").disabled = false;
 }
 
-//end of main function
-
+function reset() {
+	Seq = [];
+	document.getElementById("sequenceOutput").innerHTML = "";
+	document.getElementById("text_before_sequenceInput").innerHTML = "<b>a<sub>1</sub></b> = ";
+	document.getElementById("sequenceInput").disabled = false;
+	document.getElementById("addButton").disabled = false;
+	document.getElementById("executeButton").disabled = true;
+	document.getElementById("resetButton").disabled = true;
+	document.getElementById("sequenceInput").focus();
+}
 
 function isGeo(A) {
 	var D = A[1] / A[0];
