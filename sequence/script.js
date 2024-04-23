@@ -15,7 +15,7 @@ function addToSequence() {
 		for (var i = 0; i < Seq.length; i++) {
 			sequenceHTML += "<br>a<sub>" + (i + 1) + "</sub>= " + Seq[i];
 		}
-		document.getElementById("sequenceOutput").innerHTML = sequenceHTML;
+		document.getElementById("sequenceInputSoFar").innerHTML = sequenceHTML;
 		document.getElementById("text_before_sequenceInput").innerHTML = "<b>a<sub>" + (Seq.length + 1) + " </sub></b>= ";
 
 		input.value = ''; // Clear the input
@@ -92,6 +92,7 @@ function computeSequence() {
 		//add code about sub of sub
 	}
 
+	document.getElementById("sequenceInputSoFar").innerHTML = "";
 	document.getElementById("sequenceOutput").innerHTML = answerText;
 
 
