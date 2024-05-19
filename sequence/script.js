@@ -121,6 +121,12 @@ function updateSequenceDisplay() {
 
 // Compute and display sequence information
 function computeSequence() {
+	document.getElementById("sequenceInput").disabled = true;
+	document.getElementById("addButton").disabled = true;
+	document.getElementById("executeButton").disabled = true;
+	document.getElementById("resetButton").disabled = false;
+	document.getElementById("resetButton").disabled = false;
+
 	let sequenceType = '';
 	const sequenceObjects = [new GeometricSequence(), new ArithmeticSequence(), new FibonacciSequence()];
 	for (const sequenceObject of sequenceObjects) {
@@ -132,17 +138,13 @@ function computeSequence() {
 		}
 	}
 	if (sequence === null) {
-		// TODO
+    	document.getElementById("sequenceInputSoFar").innerHTML += "<br>ごめんなさい、数列の種類がわかりませんでした...リセットして別の数列で試してみてください。";
 		return;
 	}
 	document.getElementById("sequenceInputSoFar").innerHTML = "";
     displaySequenceInfo();
     extendSequence();
     displayExtendedSequence();
-	document.getElementById("sequenceInput").disabled = true;
-	document.getElementById("addButton").disabled = true;
-	document.getElementById("executeButton").disabled = true;
-	document.getElementById("resetButton").disabled = false;
 }
 
 // Display sequence information based on type
@@ -168,6 +170,7 @@ function displayExtendedSequence() {
 function reset() {
     sequence_values.length = 0; // Clear the array
     document.getElementById("sequenceOutput").innerHTML = "";
+	document.getElementById("sequenceInputSoFar").innerHTML = "";
     document.getElementById("text_before_sequenceInput").innerHTML = "<b>a<sub>1</sub></b> = ";
     document.getElementById("sequenceInput").disabled = false;
     document.getElementById("addButton").disabled = false;
