@@ -97,8 +97,9 @@ class FibonacciSequence extends SequenceObject {
 		return answerText;
 	}
 	ippan_ko(n) {
-		if (n < sequence_values.length) {
-			return sequence_values[n];
+		let idx = n - 1;
+		if (idx < sequence_values.length) {
+			return sequence_values[idx];
 		}
 		return this.ippan_ko(n - 1) + this.ippan_ko(n - 2);
 	}
@@ -186,11 +187,18 @@ function extendSequence() {
 function updateUserQueries(){
 	// update the UI that displays the user specified info about the index on the page
 	let user_specified_idx = Number(document.getElementById("user_specified_idx").value);
+	let sum_start_idx = Number(document.getElementById("sum_start_idx").value);
+	let sum_end_idx = Number(document.getElementById("sum_end_idx").value);
+	let max_idx_fibo = 100
+	// warn user if user_specified_idx is very large and it's a fibonacci
+	if (sequence.constructor.name === "FibonacciSequence" && (user_specified_idx > max_idx_fibo || sum_end_idx > max_idx_fibo|| sum_start_idx > max_idx_fibo)){
+		let warn_result = confirm(`フィボナッチ数列の大きな項を計算すると時間がかかるかもしれません。計算を続けますか？`);
+		if (!warn_result)
+			return;  // don't compute if cancelled
+	}
 	if (!isNaN(user_specified_idx)) {
 		document.getElementById("user_specified_output").innerHTML = `${sequence.ippan_ko(user_specified_idx)}`;
 	}
-	let sum_start_idx = Number(document.getElementById("sum_start_idx").value);
-	let sum_end_idx = Number(document.getElementById("sum_end_idx").value);
 	if (!isNaN(sum_start_idx) && !isNaN(sum_end_idx)) {
 		let sum = 0;
 		for (let i = sum_start_idx; i <= sum_end_idx; i++) {
