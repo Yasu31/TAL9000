@@ -39,7 +39,7 @@ class GeometricSequence extends SequenceObject {
 		this.ratio = seq[1] / seq[0];
 		this.first_term = seq[0];
 		// 数列の各項が等比数列の条件を満たすか判定
-		return seq.every((value, index, array) => index === 0 || value / array[index - 1] === this.ratio);
+		return seq.every((value, index, array) => index === 0 || Math.abs(value / array[index - 1] - this.ratio) < 0.0001);
 	}
 	describe() {
 		let message = `初項が${this.first_term}、公比が${this.ratio}の等比数列だね。`;
@@ -64,7 +64,7 @@ class ArithmeticSequence extends SequenceObject {
 	check(seq) {
 		this.diff = seq[1] - seq[0];
 		this.first_term = seq[0];
-		return seq.every((value, index, array) => index === 0 || value - array[index - 1] === this.diff);
+		return seq.every((value, index, array) => index === 0 || Math.abs(value - array[index - 1] - this.diff) < 0.0001);
 	}
 	describe() {
 		let message = `初項が${this.first_term}、公差が${this.diff}の等差数列だね。`;
@@ -221,6 +221,10 @@ function reset() {
 	document.getElementById("user_specified_idx").disabled = true;
 	document.getElementById("sum_start_idx").disabled = true;
 	document.getElementById("sum_end_idx").disabled = true;
+	// overwrite them so that these indices aren't ridiculously large, otherwise it could hang the browser
+	document.getElementById("user_specified_idx").value = "5";
+	document.getElementById("sum_start_idx").value = "1";
+	document.getElementById("sum_end_idx").value = "6";
 	document.getElementById("user_specified_output").innerHTML = "";
 	document.getElementById("sum_output").innerHTML = "";
     document.getElementById("sequenceInput").focus();
