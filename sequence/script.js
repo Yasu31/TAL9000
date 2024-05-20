@@ -105,7 +105,7 @@ function addToSequence() {
     sequence_values.push(number);
     updateSequenceDisplay();
 	// don't allow the user to push the execute button if there are too few elements in the sequence
-    document.getElementById("executeButton").disabled = sequence_values.length < 2;
+    document.getElementById("executeButton").disabled = sequence_values.length < 3;
     input.value = ''; // Clear the input
     input.focus(); // Keep focus on input for next entry
 }
