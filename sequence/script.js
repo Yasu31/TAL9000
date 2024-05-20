@@ -1,3 +1,13 @@
+function showEquation(latex){
+	// make it easy to display equations with the same style
+	return `<span style="font-size:30px">\\(${latex}\\)</span>`;
+}
+
+function addRow(firstCol, secondCol){
+	// make it easy to add new rows to tables (make the <table></table> tags yourself)
+	return `<tr><td>${firstCol}</td><td>${secondCol}</td></tr>`;
+}
+
 class SequenceObject {
 	// 数列の判定を行い、数列についての情報を保存するクラス
     constructor() {
@@ -33,7 +43,11 @@ class GeometricSequence extends SequenceObject {
 	}
 	describe() {
 		let message = `初項が${this.first_term}、公比が${this.ratio}の等比数列だね。`;
-		message += `<br>一般項: <font size='15'>a<sub>n</sub> = ${this.first_term} x ${this.ratio}<sup>n-1</sup></fo`;
+		message += "<table>";
+		message += addRow("一般項", showEquation(`a_n = ${this.first_term} \\times ${this.ratio}^{n-1}`));
+		message += addRow("漸化式", showEquation(`a_1 = ${this.first_term}, a_{n+1} = ${this.ratio} a_n`));
+		message += addRow("和の公式", showEquation(`\\Sigma_{k=1}^n a_k = \\frac{${this.first_term}(1 - ${this.ratio}^n)}{${1 - this.ratio}}`));
+		message += "</table>";
 		return message;
 	}
 	ippan_ko(n) {
@@ -54,7 +68,11 @@ class ArithmeticSequence extends SequenceObject {
 	}
 	describe() {
 		let message = `初項が${this.first_term}、公差が${this.diff}の等差数列だね。`;
-		message += `<br>一般項: <font size='15'>a<sub>n</sub> = ${this.first_term} + ${this.diff}(n-1)</font>`;
+		message += "<table>";
+		message += addRow(`一般項`,showEquation(`a_n = ${this.first_term} + ${this.diff}(n-1)`));
+		message += addRow("漸化式", showEquation(`a_1 = ${this.first_term}, a_{n+1} = a_n + ${this.diff}`));
+		message += addRow("和の公式", showEquation(`\\Sigma_{k=1}^n a_k = \\frac{n(${2*this.first_term - this.diff} + ${this.diff}n)}{2}`));
+		message += "</table>";
 		return message;
 	}
 	ippan_ko(n) {
@@ -74,8 +92,8 @@ class FibonacciSequence extends SequenceObject {
 		return seq.length < 3 || seq.every((value, index, array) => index < 2 || value === array[index - 1] + array[index - 2]);
 	}
 	describe() {
-		let answerText = "フィボナッチ数列を入力するとはあざとい…<br>";
-		answerText += "<font size='15'>a<sub>n+2</sub>=a<sub>n+1</sub>+a<sub>n</sub></font><br>という漸化式で表せるね！";
+		let answerText = "フィボナッチ数列を入力するとはあざとい…";
+		answerText += `<br><br>漸化式: ${showEquation(`a_1 = ${this.first_term}, a_2 = ${this.second_term}, a_{n+1} = a_n + a_{n-1}`)}`;
 		return answerText;
 	}
 	ippan_ko(n) {
@@ -108,6 +126,8 @@ function addToSequence() {
     document.getElementById("executeButton").disabled = sequence_values.length < 3;
     input.value = ''; // Clear the input
     input.focus(); // Keep focus on input for next entry
+	// allow user to reset the sequence after the first element is added
+	document.getElementById("resetButton").disabled = false;
 }
 
 // Update sequence display on the webpage
@@ -150,6 +170,7 @@ function computeSequence() {
 // Display sequence information based on type
 function displaySequenceInfo() {
     document.getElementById("sequenceInputSoFar").innerHTML = sequence.describe();
+	MathJax.typeset();
 }
 
 function extendSequence() {

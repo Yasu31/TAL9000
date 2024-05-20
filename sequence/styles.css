@@ -1,0 +1,4 @@
+/* align the first column of a table to the right for better formatting */
+td:first-child {
+    text-align: right;
+}

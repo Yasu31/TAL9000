@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -25,6 +25,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>数列 自動判定</title>
     <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="styles.css" />
 
     <meta name="twitter:title" content="数列判定AI: その数列を解いてみせる！" />
     <meta name="twitter:card" content="summary" />
@@ -32,6 +33,10 @@
       name="twitter:image"
       content="https://yasunori.xyz/submit_timer/image.png"
     />
+
+    <!-- use LaTeX equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
 
   <body onload="reset()">
@@ -43,7 +48,7 @@
       <hr />
 
       <span id="text_before_sequenceInput"></span>
-      <input type="number" id="sequenceInput" placeholder="数字を入力" />
+      <input type="number" id="sequenceInput" placeholder="数字を入力" style="width: 150px; height: 40px; font-size: 20px;" />
       <br />
       <input type="button" value="数列に追加" id="addButton" onclick="addToSequence()" />
       <input type="button" value="判定実行！" id="executeButton" onclick="computeSequence()"/>
