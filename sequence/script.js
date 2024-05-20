@@ -146,6 +146,9 @@ function computeSequence() {
 	document.getElementById("executeButton").disabled = true;
 	document.getElementById("resetButton").disabled = false;
 	document.getElementById("resetButton").disabled = false;
+	document.getElementById("user_specified_idx").disabled = false;
+	document.getElementById("sum_start_idx").disabled = false;
+	document.getElementById("sum_end_idx").disabled = false;
 
 	let sequenceType = '';
 	const sequenceObjects = [new GeometricSequence(), new ArithmeticSequence(), new FibonacciSequence()];
@@ -165,6 +168,7 @@ function computeSequence() {
     displaySequenceInfo();
     extendSequence();
     displayExtendedSequence();
+	updateUserQueries();
 }
 
 // Display sequence information based on type
@@ -177,6 +181,23 @@ function extendSequence() {
     while (sequence_values.length < 100) {
 		sequence_values.push(sequence.ippan_ko(sequence_values.length + 1));
     }
+}
+
+function updateUserQueries(){
+	// update the UI that displays the user specified info about the index on the page
+	let user_specified_idx = Number(document.getElementById("user_specified_idx").value);
+	if (!isNaN(user_specified_idx)) {
+		document.getElementById("user_specified_output").innerHTML = `${sequence.ippan_ko(user_specified_idx)}`;
+	}
+	let sum_start_idx = Number(document.getElementById("sum_start_idx").value);
+	let sum_end_idx = Number(document.getElementById("sum_end_idx").value);
+	if (!isNaN(sum_start_idx) && !isNaN(sum_end_idx)) {
+		let sum = 0;
+		for (let i = sum_start_idx; i <= sum_end_idx; i++) {
+			sum += sequence.ippan_ko(i);
+		}
+		document.getElementById("sum_output").innerHTML = `${sum}`;
+	}
 }
 
 // Display the extended sequence
@@ -197,6 +218,11 @@ function reset() {
     document.getElementById("addButton").disabled = false;
     document.getElementById("executeButton").disabled = true;
     document.getElementById("resetButton").disabled = true;
+	document.getElementById("user_specified_idx").disabled = true;
+	document.getElementById("sum_start_idx").disabled = true;
+	document.getElementById("sum_end_idx").disabled = true;
+	document.getElementById("user_specified_output").innerHTML = "";
+	document.getElementById("sum_output").innerHTML = "";
     document.getElementById("sequenceInput").focus();
 	sequence = null;
 }

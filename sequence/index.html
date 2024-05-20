@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -96,6 +96,16 @@
           (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
       <hr />
+      <table>
+      <tr>
+        <td>第<input type="number" id="user_specified_idx" style="width:30px;" value="5" pattern="\d*" onchange="updateUserQueries()" />項: </td>
+        <td><span style="font-weight: bold;" id="user_specified_output"></span></td>
+      </tr>
+      <tr>
+        <td>第<input type="number" id="sum_start_idx" style="width:30px;" value="1" pattern="\d*" onchange="updateUserQueries()"/>〜<input type="number" id="sum_end_idx" style="width:30px;" value="10" pattern="\d*" onchange="updateUserQueries()"/>項の和: </td>
+        <td><span id="sum_output" style="font-weight: bold;"></span></td>
+      </tr>
+    </table>
 
       <!-- show the result here -->
       <div id="sequenceOutput"></div>
