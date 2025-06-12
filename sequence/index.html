@@ -26,7 +26,12 @@
     <title>数列自動判定AIツール</title>
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="alternate" hreflang="ja" href="https://yasunori.jp/TAL9000/sequence/" />
+    <link rel="alternate" hreflang="en" href="https://yasunori.jp/TAL9000/sequence/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://yasunori.jp/TAL9000/sequence/" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+    <meta name="description" content="入力した数列から種類を自動判定し一般項などを計算する無料ツール" />
 
     <meta name="twitter:title" content="数列判定AI: その数列を解いてみせる！" />
     <meta name="twitter:card" content="summary" />
@@ -38,13 +43,13 @@
     <!-- use LaTeX equations -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script defer src="script.js"></script>
   </head>
 
   <body onload="reset()">
     <h1 class="page-title">数列判定AI:その数列を解いてみせる！</h1>
 
 
-    <script src="script.js"></script>
     <div class="sequence-container">
       <hr />
 
@@ -74,7 +79,7 @@
           data-count="false"
           data-message="testtest"
           data-ver="3"
-          style="display: none; width: 50%; float: left"
+          class="line-share"
         ></div>
         <script
           src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js"
@@ -87,8 +92,7 @@
 
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9028853950087862"
      crossorigin="anonymous"></script>
-      <ins class="adsbygoogle"
-          style="display:block; text-align:center;"
+      <ins class="adsbygoogle ads-center"
           data-ad-layout="in-article"
           data-ad-format="fluid"
           data-ad-client="ca-pub-9028853950087862"
@@ -99,12 +103,12 @@
       <hr />
       <table>
       <tr>
-        <td>第<input type="number" id="user_specified_idx" style="width:30px;" value="5" pattern="\d*" onchange="updateUserQueries()" />項: </td>
-        <td><span style="font-weight: bold;" id="user_specified_output"></span></td>
+        <td>第<input type="number" id="user_specified_idx" class="short-input" value="5" pattern="\d*" onchange="updateUserQueries()" />項: </td>
+        <td><span class="bold-text" id="user_specified_output"></span></td>
       </tr>
       <tr>
-        <td>第<input type="number" id="sum_start_idx" style="width:30px;" value="1" pattern="\d*" onchange="updateUserQueries()"/>〜<input type="number" id="sum_end_idx" style="width:30px;" value="10" pattern="\d*" onchange="updateUserQueries()"/>項の和: </td>
-        <td><span id="sum_output" style="font-weight: bold;"></span></td>
+        <td>第<input type="number" id="sum_start_idx" class="short-input" value="1" pattern="\d*" onchange="updateUserQueries()"/>〜<input type="number" id="sum_end_idx" class="short-input" value="10" pattern="\d*" onchange="updateUserQueries()"/>項の和: </td>
+        <td><span id="sum_output" class="bold-text"></span></td>
       </tr>
     </table>
 
@@ -118,8 +122,7 @@
       crossorigin="anonymous"
     ></script>
     <ins
-      class="adsbygoogle"
-      style="display: block"
+      class="adsbygoogle ad-block"
       data-ad-format="autorelaxed"
       data-ad-client="ca-pub-9028853950087862"
       data-ad-slot="7726765984"
@@ -128,7 +131,7 @@
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
     <h2>よくある質問（FAQ）</h2>
-    <p style="text-align: left;">
+    <p class="faq-text">
       <strong>Q: この数列自動判定ツールは無料ですか？</strong><br />
       A: はい、もちろん無料で使い放題です。
       <br /><br />
