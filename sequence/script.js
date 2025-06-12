@@ -109,6 +109,15 @@ class FibonacciSequence extends SequenceObject {
 const sequence_values = [];
 let sequence = null;
 
+// Allow pressing Enter to add a number
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('sequenceInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            addToSequence();
+        }
+    });
+});
+
 // Add to sequence from user input
 function addToSequence() {
     const input = document.getElementById('sequenceInput');

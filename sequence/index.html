@@ -44,11 +44,11 @@
 
 
     <script src="script.js"></script>
-    <center>
+    <div class="sequence-container">
       <hr />
 
       <span id="text_before_sequenceInput"></span>
-      <input type="number" id="sequenceInput" placeholder="数字を入力" style="width: 150px; height: 40px; font-size: 20px;" />
+      <input type="number" id="sequenceInput" placeholder="数字を入力" />
       <br />
       <input type="button" value="数列に追加" id="addButton" onclick="addToSequence()" />
       <input type="button" value="判定実行！" id="executeButton" onclick="computeSequence()"/>
@@ -109,7 +109,7 @@
 
       <!-- show the result here -->
       <div id="sequenceOutput"></div>
-    </center>
+    </div>
     <!-- adsense multiplex ad-->
     <script
       async
