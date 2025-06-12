@@ -142,10 +142,13 @@ function addToSequence() {
 
 // Update sequence display on the webpage
 function updateSequenceDisplay() {
-	let sequenceHTML = '';
-	for (let index = 0; index < sequence_values.length; index++)
-		sequenceHTML += `<br>a<sub>${index + 1}</sub>= ${sequence_values[index]}`;
-    document.getElementById("sequenceInputSoFar").innerHTML = sequenceHTML;
+    let sequenceHTML = '';
+    for (let index = 0; index < sequence_values.length; index++)
+        sequenceHTML += `<br>a<sub>${index + 1}</sub>= ${sequence_values[index]}`;
+    const soFar = document.getElementById("sequenceInputSoFar");
+    soFar.innerHTML = sequenceHTML;
+    soFar.classList.add('fade-in');
+    setTimeout(() => soFar.classList.remove('fade-in'), 500);
     document.getElementById("text_before_sequenceInput").innerHTML = `<b>a<sub>${sequence_values.length + 1}</sub></b> = `;
 }
 
@@ -183,8 +186,11 @@ function computeSequence() {
 
 // Display sequence information based on type
 function displaySequenceInfo() {
-    document.getElementById("sequenceInputSoFar").innerHTML = sequence.describe();
-	MathJax.typeset();
+    const soFar = document.getElementById("sequenceInputSoFar");
+    soFar.innerHTML = sequence.describe();
+    soFar.classList.add('fade-in');
+    setTimeout(() => soFar.classList.remove('fade-in'), 500);
+    MathJax.typeset();
 }
 
 function extendSequence() {
@@ -219,10 +225,13 @@ function updateUserQueries(){
 
 // Display the extended sequence
 function displayExtendedSequence() {
-	let sequenceHTML = '';
-	for (let index = 0; index < sequence_values.length; index++)
-		sequenceHTML += `<br>a<sub>${index + 1}</sub>= ${sequence_values[index]}`;
-    document.getElementById("sequenceOutput").innerHTML += sequenceHTML;
+    let sequenceHTML = '';
+    for (let index = 0; index < sequence_values.length; index++)
+        sequenceHTML += `<br>a<sub>${index + 1}</sub>= ${sequence_values[index]}`;
+    const out = document.getElementById("sequenceOutput");
+    out.innerHTML += sequenceHTML;
+    out.classList.add('fade-in');
+    setTimeout(() => out.classList.remove('fade-in'), 500);
 }
 
 // Reset the application to initial state
@@ -247,3 +256,4 @@ function reset() {
     document.getElementById("sequenceInput").focus();
 	sequence = null;
 }
+
