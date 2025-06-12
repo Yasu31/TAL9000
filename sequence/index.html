@@ -26,6 +26,7 @@
     <title>数列 自動判定</title>
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
     <meta name="twitter:title" content="数列判定AI: その数列を解いてみせる！" />
     <meta name="twitter:card" content="summary" />
@@ -40,15 +41,15 @@
   </head>
 
   <body onload="reset()">
-    <h1>数列判定AI:その数列を解いてみせる！</h1>
+    <h1 class="page-title">数列判定AI:その数列を解いてみせる！</h1>
 
 
     <script src="script.js"></script>
-    <center>
+    <div class="sequence-container">
       <hr />
 
       <span id="text_before_sequenceInput"></span>
-      <input type="number" id="sequenceInput" placeholder="数字を入力" style="width: 150px; height: 40px; font-size: 20px;" />
+      <input type="number" id="sequenceInput" placeholder="数字を入力" />
       <br />
       <input type="button" value="数列に追加" id="addButton" onclick="addToSequence()" />
       <input type="button" value="判定実行！" id="executeButton" onclick="computeSequence()"/>
@@ -109,7 +110,7 @@
 
       <!-- show the result here -->
       <div id="sequenceOutput"></div>
-    </center>
+    </div>
     <!-- adsense multiplex ad-->
     <script
       async
@@ -143,3 +144,4 @@
     </p>
   </body>
 </html>
+
