@@ -20,7 +20,7 @@ td:first-child {
 body {
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #1d2b64, #f8cdda);
+    background: linear-gradient(135deg, #1d2b64, hsl(342, 38%, 60%));
     color: #fff;
     line-height: 1.6;
     min-height: 100vh;
@@ -30,6 +30,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+a {
+    color: #b3edfa;
+}
+
+a:visited {
+    color: #8da9b2;
 }
 
 .page-title {
