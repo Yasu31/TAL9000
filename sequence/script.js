@@ -4,9 +4,11 @@ function showEquation(latex){
 }
 
 function addRow(firstCol, secondCol){
-	// make it easy to add new rows to tables (make the <table></table> tags yourself)
-	return `<tr><td>${firstCol}</td><td>${secondCol}</td></tr>`;
+        // make it easy to add new rows to tables (make the <table></table> tags yourself)
+        return `<tr><td>${firstCol}</td><td>${secondCol}</td></tr>`;
 }
+
+const isEnglish = document.documentElement.lang.startsWith('en');
 
 class SequenceObject {
 	// 数列の判定を行い、数列についての情報を保存するクラス
@@ -41,15 +43,17 @@ class GeometricSequence extends SequenceObject {
 		// 数列の各項が等比数列の条件を満たすか判定
 		return seq.every((value, index, array) => index === 0 || Math.abs(value / array[index - 1] - this.ratio) < 0.0001);
 	}
-	describe() {
-		let message = `初項が${this.first_term}、公比が${this.ratio}の等比数列だね。`;
-		message += "<table>";
-		message += addRow("一般項", showEquation(`a_n = ${this.first_term} \\times ${this.ratio}^{n-1}`));
-		message += addRow("漸化式", showEquation(`a_1 = ${this.first_term}, a_{n+1} = ${this.ratio} a_n`));
-		message += addRow("和の公式", showEquation(`\\Sigma_{k=1}^n a_k = \\frac{${this.first_term}(1 - ${this.ratio}^n)}{${1 - this.ratio}}`));
-		message += "</table>";
-		return message;
-	}
+        describe() {
+                let message = isEnglish ?
+                        `It's a geometric sequence with first term ${this.first_term} and ratio ${this.ratio}.` :
+                        `初項が${this.first_term}、公比が${this.ratio}の等比数列だね。`;
+                message += "<table>";
+                message += addRow(isEnglish ? "General term" : "一般項", showEquation(`a_n = ${this.first_term} \\times ${this.ratio}^{n-1}`));
+                message += addRow(isEnglish ? "Recurrence" : "漸化式", showEquation(`a_1 = ${this.first_term}, a_{n+1} = ${this.ratio} a_n`));
+                message += addRow(isEnglish ? "Summation formula" : "和の公式", showEquation(`\\Sigma_{k=1}^n a_k = \\frac{${this.first_term}(1 - ${this.ratio}^n)}{${1 - this.ratio}}`));
+                message += "</table>";
+                return message;
+        }
 	ippan_ko(n) {
 		return this.first_term * (this.ratio ** (n - 1));
 	}
@@ -66,15 +70,17 @@ class ArithmeticSequence extends SequenceObject {
 		this.first_term = seq[0];
 		return seq.every((value, index, array) => index === 0 || Math.abs(value - array[index - 1] - this.diff) < 0.0001);
 	}
-	describe() {
-		let message = `初項が${this.first_term}、公差が${this.diff}の等差数列だね。`;
-		message += "<table>";
-		message += addRow(`一般項`,showEquation(`a_n = ${this.first_term} + ${this.diff}(n-1)`));
-		message += addRow("漸化式", showEquation(`a_1 = ${this.first_term}, a_{n+1} = a_n + ${this.diff}`));
-		message += addRow("和の公式", showEquation(`\\Sigma_{k=1}^n a_k = \\frac{n(${2*this.first_term - this.diff} + ${this.diff}n)}{2}`));
-		message += "</table>";
-		return message;
-	}
+        describe() {
+                let message = isEnglish ?
+                        `It's an arithmetic sequence with first term ${this.first_term} and difference ${this.diff}.` :
+                        `初項が${this.first_term}、公差が${this.diff}の等差数列だね。`;
+                message += "<table>";
+                message += addRow(isEnglish ? "General term" : `一般項`, showEquation(`a_n = ${this.first_term} + ${this.diff}(n-1)`));
+                message += addRow(isEnglish ? "Recurrence" : "漸化式", showEquation(`a_1 = ${this.first_term}, a_{n+1} = a_n + ${this.diff}`));
+                message += addRow(isEnglish ? "Summation formula" : "和の公式", showEquation(`\\Sigma_{k=1}^n a_k = \\frac{n(${2*this.first_term - this.diff} + ${this.diff}n)}{2}`));
+                message += "</table>";
+                return message;
+        }
 	ippan_ko(n) {
 		return this.first_term + this.diff * (n - 1);
 	}
@@ -91,11 +97,13 @@ class FibonacciSequence extends SequenceObject {
 		this.second_term = seq[1];
 		return seq.length < 3 || seq.every((value, index, array) => index < 2 || value === array[index - 1] + array[index - 2]);
 	}
-	describe() {
-		let answerText = "フィボナッチ数列を入力するとはあざとい…";
-		answerText += `<br><br>漸化式: ${showEquation(`a_1 = ${this.first_term}, a_2 = ${this.second_term}, a_{n+1} = a_n + a_{n-1}`)}`;
-		return answerText;
-	}
+        describe() {
+                let answerText = isEnglish ?
+                        "So you entered a Fibonacci sequence, huh..." :
+                        "フィボナッチ数列を入力するとはあざとい…";
+                answerText += `<br><br>${isEnglish ? 'Recurrence' : '漸化式'}: ${showEquation(`a_1 = ${this.first_term}, a_2 = ${this.second_term}, a_{n+1} = a_n + a_{n-1}`)}`;
+                return answerText;
+        }
 	ippan_ko(n) {
 		let idx = n - 1;
 		if (idx < sequence_values.length) {
@@ -121,13 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Add to sequence from user input
 function addToSequence() {
     const input = document.getElementById('sequenceInput');
-	if (input.value == "") {
-		alert('数字を入力してから「数列に追加」を押してね');
-		return;
-	}
+    if (input.value == "") {
+        alert(isEnglish ? 'Enter a number before clicking "Add to sequence"' : '数字を入力してから「数列に追加」を押してね');
+        return;
+    }
     const number = Number(input.value.trim());
     if (isNaN(number)) {
-        alert('数字を半角で入力してから「数列に追加」を押してね');
+        alert(isEnglish ? 'Please enter a valid number (half-width digits) before pressing "Add to sequence"' : '数字を半角で入力してから「数列に追加」を押してね');
         return;
     }
     sequence_values.push(number);
@@ -173,10 +181,10 @@ function computeSequence() {
 			break;
 		}
 	}
-	if (sequence === null) {
-    	document.getElementById("sequenceInputSoFar").innerHTML += "<br>ごめんなさい、数列の種類がわかりませんでした...リセットして別の数列で試してみてください。";
-		return;
-	}
+        if (sequence === null) {
+        document.getElementById("sequenceInputSoFar").innerHTML += `<br>${isEnglish ? 'Sorry, I couldn\'t determine the sequence type... Please reset and try another sequence.' : 'ごめんなさい、数列の種類がわかりませんでした...リセットして別の数列で試してみてください。'}`;
+                return;
+        }
 	document.getElementById("sequenceInputSoFar").innerHTML = "";
     displaySequenceInfo();
     extendSequence();
@@ -206,11 +214,13 @@ function updateUserQueries(){
 	let sum_end_idx = Number(document.getElementById("sum_end_idx").value);
 	let max_idx_fibo = 100
 	// warn user if user_specified_idx is very large and it's a fibonacci
-	if (sequence.constructor.name === "FibonacciSequence" && (user_specified_idx > max_idx_fibo || sum_end_idx > max_idx_fibo|| sum_start_idx > max_idx_fibo)){
-		let warn_result = confirm(`フィボナッチ数列の大きな項を計算すると時間がかかるかもしれません。計算を続けますか？`);
-		if (!warn_result)
-			return;  // don't compute if cancelled
-	}
+        if (sequence.constructor.name === "FibonacciSequence" && (user_specified_idx > max_idx_fibo || sum_end_idx > max_idx_fibo|| sum_start_idx > max_idx_fibo)){
+                let warn_result = confirm(isEnglish ?
+                        'Computing large terms of the Fibonacci sequence might take a while. Continue?' :
+                        `フィボナッチ数列の大きな項を計算すると時間がかかるかもしれません。計算を続けますか？`);
+                if (!warn_result)
+                        return;  // don't compute if cancelled
+        }
 	if (!isNaN(user_specified_idx)) {
 		document.getElementById("user_specified_output").innerHTML = `${sequence.ippan_ko(user_specified_idx)}`;
 	}

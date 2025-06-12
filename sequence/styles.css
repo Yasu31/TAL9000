@@ -133,3 +133,35 @@ table {
         transform: translateY(0);
     }
 }
+
+.short-input {
+    width: 30px;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.line-share {
+    display: none;
+    width: 50%;
+    float: left;
+}
+
+.ads-center {
+    display: block;
+    text-align: center;
+}
+
+.ad-block {
+    display: block;
+}
+
+.faq-text {
+    text-align: left;
+}
+
+.lang-switch {
+    align-self: flex-end;
+    margin: 10px;
+}
