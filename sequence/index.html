@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
@@ -23,7 +23,7 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>数列 自動判定</title>
+    <title>数列自動判定AIツール</title>
     <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
@@ -32,7 +32,7 @@
     <meta name="twitter:card" content="summary" />
     <meta
       name="twitter:image"
-      content="https://yasunori.xyz/submit_timer/image.png"
+      content="https://yasunori.jp/submit_timer/image.png"
     />
 
     <!-- use LaTeX equations -->
@@ -127,20 +127,31 @@
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+    <h2>よくある質問（FAQ）</h2>
     <p>
-      2022年02月追記:
-      最近、なぜだかこのページへのアクセスが増えているようで嬉しいのですが、これは10年前くらいに高校生の時に、ほぼネタ(＆プログラミングの練習)として書いたプログラムほぼそのまま（若干手を加えている）なので正確性には期待しないでください。ソースコードは<a
-        href="https://github.com/Yasu31/TAL9000/tree/master/sequence"
-        >GitHubで公開されてる</a
-      >ので改造してみたい物好きな人はぜひ編集してプルリクでも送ってください。
+      <strong>Q: この数列自動判定ツールは無料ですか？</strong><br />
+      A: はい、もちろん無料で使い放題です。
+      <br /><br />
+      <strong>Q: 判定アルゴリズムの精度は？</strong><br />
+      A: 生成AIは使用しておらず、ルールベースの「AI」で実装しています（ソースコードは<a href="https://github.com/Yasu31/TAL9000/tree/master/sequence/script.js">こちら</a>）。なので、対応している種類の数列であれば厳密に解くことができます。ただし入力した数列が２種類以上に当てはまる場合、一つの解だけが表示されます。
+      <br /><br />
+      <strong>Q: 結果が間違っている気がします。バグ報告の方法は？</strong><br />
+      <a href="/">トップページ</a>に連絡先やTwitterが載っているので、スクショなどとともに連絡してくれると助かります。
+      <br /><br />
+      <strong>Q: どのような数列が判定できますか？</strong><br />
+      A: いくつかの有名な数列（等比数列、等差数列、フィボナッチ数列など）を判定できます。
+      詳しくは<a href="https://github.com/Yasu31/TAL9000/tree/master/sequence/script.js">ソースコード</a>を参照してください。
+      <br /><br />
+      <strong>Q: どうしてこんなツールを作ったんですか？</strong><br />
+      １０年以上前の高校生の頃に、プログラミングの練習として数列判定プログラムをJavaScriptで書いたのが始まりです。自分のサイトを立ち上げた際にこのプログラムも載せておいたところ、なぜだかこのページへのアクセスが増えてきたので、UIとかをちゃんと整えていきました。ソースコードは<a href="https://github.com/Yasu31/TAL9000/tree/master/sequence">GitHubで公開されてる</a>ので改造してみたい物好きな人はぜひ編集してプルリクでも送ってください。
+    </p>
+    <p>
+
     </p>
 
     <p>
-      当時は他にも<a href="../index.html">色々なくだらないプログラム</a
-      >作ってました。今はロボットを研究している大学院生やってます(私のプロフィールは<a
-        href="/"
-        >こちらから</a
-      >)。
+      当時は他にも<a href="../index.html">色々なくだらないプログラム</a>作ってました。
+      今はロボットを研究している大学院生やってます(私のプロフィールは<a href="/">こちらから</a>)。
     </p>
   </body>
 </html>
