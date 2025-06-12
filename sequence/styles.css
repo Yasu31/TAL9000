@@ -160,3 +160,8 @@ table {
 .faq-text {
     text-align: left;
 }
+
+.lang-switch {
+    align-self: flex-end;
+    margin: 10px;
+}
