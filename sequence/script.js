@@ -1,6 +1,6 @@
 function showEquation(latex){
 	// make it easy to display equations with the same style
-	return `<span style="font-size:30px">\\(${latex}\\)</span>`;
+	return `<span style="font-size:15px">\\(${latex}\\)</span>`;
 }
 
 function addRow(firstCol, secondCol){
